@@ -1,0 +1,19 @@
+name: Build Docker
+
+on:
+  workflow_call:
+    inputs:
+      context:
+        required: true
+        type: string
+      dockerFile:
+        required: false
+        type: string
+        default: $(inputs.context)/Dockerfile
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+    # Build the docker image
+    - name: Build Docker Image
+      run: docker build -f ${{ inputs.dockerFile }} ${{ inputs.context }}
